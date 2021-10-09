@@ -34,11 +34,11 @@ type Comment struct {
 }
 
 // sessions
-type Sessions struct {
+type Session struct {
 	ID          int       `json:"id"`
 	SessionUUID string    `json:"session_uuid" gorm:"unique"`
 	UserName    string    `json:"username" gorm:"not null; unique"`
 	CreatedAt   time.Time `json:"create_time"`
-	ExpiredAt   time.Time `json:"expired_at"`
+	ExpiredAt   int64     `json:"expired_at"`
 	UpdatedAt   time.Time `json:"updated_at"`
 }
