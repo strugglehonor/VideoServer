@@ -5,6 +5,23 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
+type middleWareHandler struct {
+	r *httprouter.Router
+}
+
+func NewMiddleWareHandler(r *httprouter.Router) http.Handler {
+	m := middleWareHandler{}
+	m.r = r
+	return m
+}
+
+func (m middleWareHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	//middleware check session
+	ValidateUserSession(r)
+	ValidateSessionID(r)
+	m.r.ServeHTTP(w, r)
+}
+
 func RegisterHander() *httprouter.Router {
 	router := httprouter.New()
 	router.POST("/user", CreateUser)
@@ -18,5 +35,6 @@ func RegisterHander() *httprouter.Router {
 
 func main() {
 	r := RegisterHander()
-	http.ListenAndServe(":8000", r)
+	m := NewMiddleWareHandler(r)
+	http.ListenAndServe(":8000", m)
 }

@@ -14,7 +14,8 @@ var (
 )
 
 func init() {
-	dsn := fmt.Sprintf("gorm:gorm@tcp(%s:%d)/gorm?charset=%s&&parseTime=True", conf.DBHost, conf.Port, conf.Charset)
+	dsn := fmt.Sprintf("gorm:gorm@tcp(%s:%d)/gorm?charset=%s&&parseTime=True", 
+	                   conf.DBHost, conf.Port, conf.Charset)
 	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		log.Fatal(err)

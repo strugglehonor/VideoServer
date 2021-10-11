@@ -8,6 +8,8 @@ import (
 
 func CreateUser(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	io.WriteString(w, "Create User")
+	// http.Handler
+	// http.HandlerFunc()
 }
 
 func Login(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
