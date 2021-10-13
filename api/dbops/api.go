@@ -52,7 +52,7 @@ func DeleteUserCredential(username string) error {
 
 // Add New Video to DB
 func AddNewVideo(userName string, videoName string) (*Video, error) {
-	err := db.First(user, "username = ?", AddNewVideo).Error
+	err := db.First(user, "username = ?", userName).Error
 	if err != nil {
 		return nil, err
 	}
@@ -88,7 +88,7 @@ func GetVideoPaginate(username string, page, limit int) ([]Video, error) {
 		query = db.Where("username = ?", username)
 	}
 
-	err := query.Debug().Order("volume").Limit(limit).Offset(offset).Find(&recs).Error
+	err := query.Debug().Order("updated_at").Limit(limit).Offset(offset).Find(&recs).Error
 	if err != nil {
 		return nil, fmt.Errorf("get video paginate from db failed, %w", err)
 	}
@@ -110,4 +110,32 @@ func NewComment(videoUUID, userUUID, content string) error {
 	return nil
 }
 
-// func ListComment()
+// List Comment
+func ListCommentPaginate(videoname, username string, page, limit int) ([]Comment, error) {
+	err := db.First(user, "username = ?", username).Error
+	if err != nil {
+		return nil, err
+	}
+
+	err = db.First(video, "video_name = ?", videoname).Error
+	if err != nil {
+		return nil, err
+	}
+
+	offset := (page - 1) * limit
+	recs := []Comment{}
+	query := db.Where("1=1")
+
+	if username != "" {
+		query = query.Where("user_uuid = ?", user.UserUUID)
+	}
+	if videoname != "" {
+		query = query.Where("video_uuid = ?", video.VideoUUID)
+	}
+	err = query.Debug().Order("updated_at").Limit(limit).Offset(offset).Find(&recs).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return recs, nil
+}

@@ -1,5 +1,11 @@
 package defs
 
+// response
+type SignedUp struct {
+	Success   bool
+	SessionID string
+}
+
 // user information
 type UserCredential struct {
 	Username string  `json:"username"`
