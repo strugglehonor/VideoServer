@@ -2,18 +2,18 @@ package dbops
 
 import (
 	"fmt"
-	"sync"
 	_ "github.com/go-sql-driver/mysql"
+	"sync"
 )
 
 // var sessionMap session.sessionMap
 
 // insert session into db
-func InsertSession(username string, sessionUUID string, expireTime int64) error{
+func InsertSession(username string, sessionUUID string, expireTime int64) error {
 	err := db.Create(&Session{
 		SessionUUID: sessionUUID,
-		UserName: username,
-		ExpiredAt: expireTime,
+		UserName:    username,
+		ExpiredAt:   expireTime,
 	}).Error
 	if err != nil {
 		return err

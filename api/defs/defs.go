@@ -8,20 +8,20 @@ type SignedUp struct {
 
 // user information
 type UserCredential struct {
-	Username string  `json:"username"`
-	Password string  `json:"password"`
+	Username string `json:"username"`
+	Password string `json:"password"`
 }
 
 // video
 type VideoInfo struct {
-	Id   int     `json:"id"`
-    Tag  string  `json:"tag"`
+	Id  int    `json:"id"`
+	Tag string `json:"tag"`
 }
 
 // Comment
 type Comment struct {
-	VideoId   int     `json:"video_id"`
-	Content   string  `json:"content"`
+	VideoId int    `json:"video_id"`
+	Content string `json:"content"`
 }
 
 // Session

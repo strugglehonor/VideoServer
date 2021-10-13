@@ -46,7 +46,7 @@ func DeleteUserCredential(username string) error {
 	if err != nil {
 		return err
 	}
-	
+
 	return nil
 }
 
@@ -60,7 +60,7 @@ func AddNewVideo(userName string, videoName string) (*Video, error) {
 	vid := utils.NewUUID()
 	err = db.Create(&Video{
 		VideoUUID: vid,
-		UserUUID: user.UserUUID,
+		UserUUID:  user.UserUUID,
 		VideoName: videoName,
 	}).Error
 	if err != nil {
@@ -100,12 +100,12 @@ func NewComment(videoUUID, userUUID, content string) error {
 	commentUUID := utils.NewUUID()
 	err := db.Create(&Comment{
 		CommentUUID: commentUUID,
-		VideoUUID: videoUUID,
-		UserUUID: userUUID,
-		Content: content,
+		VideoUUID:   videoUUID,
+		UserUUID:    userUUID,
+		Content:     content,
 	}).Error
 	if err != nil {
-		return  err
+		return err
 	}
 	return nil
 }

@@ -1,10 +1,10 @@
 package main
 
 import (
-	"io"
 	"encoding/json"
-	"net/http"
 	"github.com/video_server/api/defs"
+	"io"
+	"net/http"
 )
 
 // send Normal response

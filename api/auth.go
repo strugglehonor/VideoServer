@@ -10,7 +10,7 @@ import (
 
 var (
 	HeaderFieldSessionID = "X-Session-id"
-	HeaderFieldUser = "X-User"
+	HeaderFieldUser      = "X-User"
 )
 
 // validateUserSession

@@ -17,12 +17,12 @@ var sessionMap sync.Map
 // create session
 func NewSessionID(username string) (string, error) {
 	id := utils.NewUUID()
-	ctime := time.Now().UnixNano()/1e6  // ms
-	ttl := ctime + 30*60*1000  // set ttl 30min
+	ctime := time.Now().UnixNano() / 1e6 // ms
+	ttl := ctime + 30*60*1000            // set ttl 30min
 	session := defs.Session{
-		UserName: username,
+		UserName:   username,
 		ExpireTime: ttl,
-		CreatedAt: ctime,
+		CreatedAt:  ctime,
 	}
 	sessionMap.Store(username, session)
 
@@ -31,7 +31,7 @@ func NewSessionID(username string) (string, error) {
 		return "", err
 	}
 
-	return id, nil 
+	return id, nil
 }
 
 // load session from DB
@@ -39,7 +39,7 @@ func LoadSession() {
 	ssMap, err := dbops.RetrieveAllSessions()
 	if err != nil {
 		log.Fatal(err.Error())
-		return 
+		return
 	}
 	ssMap.Range(func(key, value interface{}) bool {
 		sessionMap.Store(key, value)
@@ -70,8 +70,8 @@ func IsSessionExpired(username string) (bool, error) {
 	}
 
 	// now time
-	ntime := time.Now().UnixNano()/1e9
-	if ntime - session.CreatedAt > session.ExpireTime {
+	ntime := time.Now().UnixNano() / 1e9
+	if ntime-session.CreatedAt > session.ExpireTime {
 		// delete session
 		DeleteSession(username)
 		return true, nil

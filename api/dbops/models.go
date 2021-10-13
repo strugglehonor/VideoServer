@@ -6,20 +6,20 @@ import (
 
 // user uuid和id要分开
 type User struct {
-	ID         int      `json:"id"`
-	UserUUID   string   `json:"user_uuid" gorm:"unique"`
-	Username   string   `json:"username" gorm:"not null; size:32; unique"`
-	Password   string   `json:"password" gorm:"not null; size:32"`
+	ID       int    `json:"id"`
+	UserUUID string `json:"user_uuid" gorm:"unique"`
+	Username string `json:"username" gorm:"not null; size:32; unique"`
+	Password string `json:"password" gorm:"not null; size:32"`
 }
 
 // video
 type Video struct {
-	ID         int       `json:"id"`
-	VideoUUID  string    `json:"video_uuid" gorm:"unique"`
-	UserUUID   string    `json:"user_uuid"`
-	VideoName  string    `json:"video_name" gorm:"not null"`
-	CreatedAt  time.Time `json:"create_time"`
-	UpdatedAt  time.Time `json:"updated_at"`
+	ID        int       `json:"id"`
+	VideoUUID string    `json:"video_uuid" gorm:"unique"`
+	UserUUID  string    `json:"user_uuid"`
+	VideoName string    `json:"video_name" gorm:"not null"`
+	CreatedAt time.Time `json:"create_time"`
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // comment

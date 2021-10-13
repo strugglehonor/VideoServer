@@ -3,11 +3,11 @@ package utils
 import (
 	"crypto/rand"
 	"fmt"
-	"io"
 	log "github.com/sirupsen/logrus"
+	"io"
 )
 
-func NewUUID() string{
+func NewUUID() string {
 	uuid := make([]byte, 16)
 	n, err := io.ReadFull(rand.Reader, uuid)
 	if n != len(uuid) || err != nil {
