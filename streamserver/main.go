@@ -12,7 +12,7 @@ type middleWareHandler struct {
 
 func NewMiddleWareHandler(r *httprouter.Router) http.Handler {
 	m := middleWareHandler{}
-	m.r = r
+	m.r = r       
 	m.c.bucket = make(chan int, limitVal)
 	return m
 }
@@ -24,7 +24,13 @@ func (m middleWareHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 func RegisterHandler() *httprouter.Router {
 	router := httprouter.New()
+
 	router.GET("/stream/:video-id", StreamHandler)
+
+	router.POST("/upload/:video-id", UploadHandler)
+
+	router.GET("/testpage", TestPageHandler)
+
 	return router
 }
 
