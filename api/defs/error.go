@@ -2,6 +2,7 @@ package defs
 
 import (
 	"fmt"
+	"net/http"
 )
 
 type BasicError struct {
@@ -20,48 +21,48 @@ var (
 			ErrorMsg:  fmt.Errorf("request param have mistakes"),
 			ErrorCode: "001",
 		},
-		HttpCode: 400,
+		HttpCode: http.StatusBadRequest,
 	}
 	AuthenticateError = Error{
 		ErrorDetail: BasicError{
 			ErrorMsg:  fmt.Errorf("authenticate failed"),
 			ErrorCode: "002",
 		},
-		HttpCode: 401,
+		HttpCode: http.StatusUnauthorized,
 	}
 	UnmarshalError = Error{
 		ErrorDetail: BasicError{
 			ErrorMsg:  fmt.Errorf("encoding/json unmarshal failed"),
 			ErrorCode: "003",
 		},
-		HttpCode: 500,
+		HttpCode: http.StatusInternalServerError,
 	}
 	MarshalError = Error{
 		ErrorDetail: BasicError{
 			ErrorMsg:  fmt.Errorf("encoding/json marshal failed"),
 			ErrorCode: "004",
 		},
-		HttpCode: 500,
+		HttpCode: http.StatusInternalServerError,
 	}
 	DBInsertError = Error{
 		ErrorDetail: BasicError{
 			ErrorMsg:  fmt.Errorf("Insert data to DB Failed"),
 			ErrorCode: "005",
 		},
-		HttpCode: 500,
+		HttpCode: http.StatusInternalServerError,
 	}
 	ErrorInternalFaults = Error{
 		ErrorDetail: BasicError{
 			ErrorMsg:  fmt.Errorf("Internal Failed"),
 			ErrorCode: "006",
 		},
-		HttpCode: 500,
+		HttpCode: http.StatusInternalServerError,
 	}
 	SessionExpiredError = Error{
 		ErrorDetail: BasicError{
 			ErrorMsg:  fmt.Errorf("session expired"),
 			ErrorCode: "007",
 		},
-		HttpCode: 403,
+		HttpCode: http.StatusForbidden,
 	}
 )

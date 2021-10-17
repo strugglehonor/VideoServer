@@ -22,4 +22,6 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	// create table
+	// db.Migrator().CreateTable(&User{}, &Video{}, &Comment{}, &Session{})
 }
