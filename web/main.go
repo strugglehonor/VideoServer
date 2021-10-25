@@ -1,6 +1,10 @@
 package web
 
-import "github.com/julienschmidt/httprouter"
+import (
+	"net/http"
+
+	"github.com/julienschmidt/httprouter"
+)
 
 func RegisterHandler() *httprouter.Router {
 	router := httprouter.New()
@@ -11,6 +15,7 @@ func RegisterHandler() *httprouter.Router {
 }
 
 func main() {
-
+	r := RegisterHandler()
+	http.ListenAndServe(":8080", r)
 }
 

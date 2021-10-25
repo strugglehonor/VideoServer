@@ -10,6 +10,14 @@ import (
 	s "github.com/video_server/api/session"
 )
 
+type HomePage struct {
+	Username  string
+}
+
+type UserPage struct {
+	Username  string
+}
+
 // user home render
 func UserHomeHandler(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	session, err1 := r.Cookie("session")
@@ -40,7 +48,7 @@ func UserHomeHandler(w http.ResponseWriter, r *http.Request, p httprouter.Params
 			SendErrorResponse(w, "username conflict", http.StatusInternalServerError)
 		}
 
-		u := UserInfo{Username: username.Value}
+		u := UserPage{Username: username.Value}
 		err := renderPage(w, "../template/userhome.html", u)
 		if err != nil {
 			SendErrorResponse(w, err.Error(), http.StatusInternalServerError)
@@ -66,13 +74,16 @@ func renderPage(w http.ResponseWriter, filepath string, data  interface{}) error
 
 // render home page
 func HomeHandler(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	err := renderPage(w, "../template/home.html", "ZigmundSu")
-	if err != nil {
-		SendErrorResponse(w, err.Error(), http.StatusInternalServerError)
-		return
+	username, err1 := r.Cookie("username")
+	ss, err2 := r.Cookie("session")
+	if err1 != nil || err2 != nil {
+		err := renderPage(w, "../template/home.html", HomePage{Username: username.Value})
+		if err != nil {
+			SendErrorResponse(w, fmt.Sprintf("render Page failed: %v", err), http.StatusInternalServerError)
+		}
 	}
-
-	if r.Method == http.MethodPost {
-		
+	
+	if len(username.Value) != 0 && len(ss.Value) != 0 {
+		http.Redirect(w, r, "/UserHome", http.StatusFound)
 	}
 }
