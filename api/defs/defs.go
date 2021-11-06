@@ -31,3 +31,15 @@ type Session struct {
 	ExpireTime int64  `json:"expire_time"`
 	CreatedAt  int64  `json:"create_time"`
 }
+
+// comment reqs
+type CommentReqs struct {
+	AuthorID  string `json:"author_id"`
+	Content   string `json:"content"`
+}
+
+// create video reqs
+type VideoReqs struct {
+	AuthodID  string `json:"author_id"`
+	VideoName string `json:"name"`
+}

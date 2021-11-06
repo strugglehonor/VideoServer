@@ -51,6 +51,13 @@ var (
 		},
 		HttpCode: http.StatusInternalServerError,
 	}
+	DBSelectError = Error{
+		ErrorDetail: BasicError{
+			ErrorMsg:  fmt.Errorf("Select data from DB Failed"),
+			ErrorCode: "005",
+		},
+		HttpCode: http.StatusInternalServerError,
+	}
 	ErrorInternalFaults = Error{
 		ErrorDetail: BasicError{
 			ErrorMsg:  fmt.Errorf("Internal Failed"),

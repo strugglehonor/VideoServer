@@ -17,6 +17,7 @@ type Video struct {
 	ID        int       `json:"id"`
 	VideoUUID string    `json:"video_uuid" gorm:"unique"`
 	UserUUID  string    `json:"user_uuid"`
+	UserName  string    `json:"username" gorm:"unique"`
 	VideoName string    `json:"video_name" gorm:"not null"`
 	CreatedAt time.Time `json:"create_time"`
 	UpdatedAt time.Time `json:"updated_at"`
