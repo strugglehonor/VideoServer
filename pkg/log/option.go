@@ -30,7 +30,7 @@ type Option func(*options)
 type options struct {
 	Level  level
 	StdLevel level
-	Format *Format
+	Format Formatter
 	IsColor bool
 	output  io.Writer
 }
@@ -42,9 +42,9 @@ func initOptions(opts ...Option) (o *options) {
 		opt(o)
 	}
 	
-	if o.Format == nil {
-		o.Format = &Format{}
-	}
+	// if o.Format == nil {
+	// 	o.Format = &Formatter{}
+	// }
 
 	if o.output == nil {
 		o.output = os.Stderr
@@ -65,11 +65,11 @@ func withColor() Option {
 	}
 }
 
-func withFormat(formation Format) Option {
-	return func(o *options) {
-		o.Format = &formation
-	}
-}
+// func withFormat(formation Format) Option {
+// 	return func(o *options) {
+// 		o.Format = &formation
+// 	}
+// }
 
 func withStdLevel(stdLevel level) Option {
 	return func(o *options) {
